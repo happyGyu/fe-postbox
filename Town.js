@@ -5,7 +5,9 @@ import {
   townMinLength,
   childTownMarginMaxRatio,
   childTownMarginMinRatio,
+  postBoxCreatingPossibility
 } from "./constant.js";
+import { Postbox } from "./Postbox.js";
 
 export class Town {
   constructor(mapSize) {
@@ -14,9 +16,7 @@ export class Town {
 
   initTown() {
     const mapDiv = document.querySelector(".map");
-    this.appendChildTown(mapDiv);
-    const childrenTownArr = Array.from(mapDiv.children);
-    this.buildTown(childrenTownArr);
+    this.buildTown([mapDiv])
   }
 
   buildTown(parentTownNodeList) {
@@ -49,7 +49,19 @@ export class Town {
     townDiv.style.width = `${townWidth}px`;
     townDiv.style["min-height"] = `${townHeight}px`;
     townDiv.style.margin = `${townTopDownMargin}px ${townLeftRightMargin}px`;
+    
+    if (this.isTherePostBox()) this.createPostBox(townDiv);
     return townDiv;
+  }
+
+  isTherePostBox() {
+    const random = Math.random();
+    return random < postBoxCreatingPossibility;
+  }
+
+  createPostBox(townDiv) {
+    const postBox = new Postbox();
+    townDiv.innerHTML = postBox.getTemplate();
   }
 
   getTownSize(parentTownSize, type) {

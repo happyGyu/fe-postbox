@@ -5,3 +5,4 @@ export const childTownSizeMaxRatio = 0.3;
 export const townMinLength = 10;
 export const childTownMarginMaxRatio = (1 - childTownSizeMaxRatio) / 10;
 export const childTownMarginMinRatio = 0;
+export const postBoxCreatingPossibility = 0.2;
