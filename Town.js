@@ -1,5 +1,5 @@
 import {
-  townNum,
+  siblingTownMaxNum,
   childTownSizeMinRatio,
   childTownSizeMaxRatio,
   townMinLength,
@@ -12,6 +12,7 @@ import { Postbox } from "./Postbox.js";
 export class Town {
   constructor(mapSize) {
     this.mapSize = mapSize;
+    this.townID = 1;
   }
 
   initTown() {
@@ -29,9 +30,9 @@ export class Town {
   }
 
   appendChildTown(parentTown) {
-    const townNum = this.getTownNum();
+    const siblingTownNum = this.getSiblingTownNum();
     const parentTownSize = [parentTown.clientWidth, parentTown.clientHeight];
-    for (let i = 0; i < townNum; i++) {
+    for (let i = 0; i < siblingTownNum; i++) {
       const townNode = this.getTownNode(parentTownSize);
       if (townNode) parentTown.appendChild(townNode);
     }
@@ -40,18 +41,26 @@ export class Town {
   getTownNode(parentTownSize) {
     const townDiv = document.createElement("div");
     townDiv.className = "town";
+    townDiv.appendChild(this.getTownNameSpan())
     const [townWidth, townHeight] = this.getTownSize(parentTownSize, "size");
     const [townTopDownMargin, townLeftRightMargin] = this.getTownSize(
       parentTownSize,
       "margin"
     );
     if (townWidth < townMinLength || townHeight < townMinLength) return;
+    this.townID++;
     townDiv.style.width = `${townWidth}px`;
-    townDiv.style["min-height"] = `${townHeight}px`;
-    townDiv.style.margin = `${townTopDownMargin}px ${townLeftRightMargin}px`;
+    //townDiv.style["min-height"] = `${townHeight}px`;
+    townDiv.style.margin = `${townTopDownMargin}px ${townLeftRightMargin}px ${townLeftRightMargin}px ${townTopDownMargin}px`;
     
     if (this.isTherePostBox()) this.createPostBox(townDiv);
     return townDiv;
+  }
+
+  getTownNameSpan() {
+    const span = document.createElement('span')
+    span.innerText = this.townID;
+    return span
   }
 
   isTherePostBox() {
@@ -61,7 +70,7 @@ export class Town {
 
   createPostBox(townDiv) {
     const postBox = new Postbox();
-    townDiv.innerHTML = postBox.getTemplate();
+    townDiv.insertAdjacentHTML('beforeend', postBox.getTemplate());
   }
 
   getTownSize(parentTownSize, type) {
@@ -78,7 +87,7 @@ export class Town {
     return [parentTownWidth * randomRatio, parentTownHeight * randomRatio];
   }
 
-  getTownNum() {
-    return Math.floor(Math.random() * townNum + 1);
+  getSiblingTownNum() {
+    return Math.floor(Math.random() * siblingTownMaxNum + 1);
   }
 }
