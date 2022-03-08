@@ -1,7 +1,7 @@
 export const postBoxMaxSize = 5;
-export const townNum = 3;
-export const childTownWidthSizeMinRatio = 0.3;
-export const childTownWidthSizeMaxRatio = 0.5;
-export const childTownHeightSizeMinRatio = 0.3;
-export const childTownHeightSizeMaxRatio = 0.5;
-export const townMinLength = 25; 
+export const townNum = 5;
+export const childTownSizeMinRatio = 0.2;
+export const childTownSizeMaxRatio = 0.3;
+export const townMinLength = 10;
+export const childTownMarginMaxRatio = (1 - childTownSizeMaxRatio) / 10;
+export const childTownMarginMinRatio = 0;

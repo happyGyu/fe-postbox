@@ -4,38 +4,36 @@
 } */
 
 .contents {
-    display:flex;
-    justify-content:space-around;
-    margin: 20px;
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
 }
 
 .map {
-    width: 80%;
-    min-height: 600px;
-    border: solid 2px;
-    display: flex;
-    flex-wrap: wrap;
+  width: 80%;
+  min-height: 600px;
+  border: solid 2px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.town{
-    border:solid 5px;
-    border-radius: 7px;
-    border-color: #2a98d8;
-    margin:5px;
-    display: flex;
-    flex-wrap: wrap;
+.town {
+  border: solid 3px;
+  border-radius: 7px;
+  border-color: #2a98d8;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .title {
-    text-align: center;
+  text-align: center;
 }
 
 button {
-    background-color: red;
-    color: white;
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-left: 10px;
-    padding: 20px 50px;
+  background-color: red;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-left: 10px;
+  padding: 20px 50px;
 }
-
