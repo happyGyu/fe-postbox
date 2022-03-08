@@ -1,0 +1,20 @@
+{
+  "name": "fe-postbox",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/happyGyu/fe-postbox.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/happyGyu/fe-postbox/issues"
+  },
+  "homepage": "https://github.com/happyGyu/fe-postbox#readme",
+  "type": "module"
+}

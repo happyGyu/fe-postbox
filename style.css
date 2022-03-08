@@ -17,6 +17,15 @@ body {
     flex-wrap: wrap;
 }
 
+.town{
+    border:solid 2px;
+    border-radius: 5px;
+    border-color: #2a98d8;
+    margin:5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .title {
     margin: 0 auto;
     text-align: center;
