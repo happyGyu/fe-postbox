@@ -10,12 +10,12 @@ import {
 import { Postbox } from "./Postbox.js";
 
 export class Town {
-  constructor(mapSize) {
-    this.mapSize = mapSize;
+  constructor() {
     this.townID = 0;
   }
 
   initTown() {
+    //querySelector 자체 API로 대체 예정
     const mapDiv = document.querySelector(".map");
     this.buildTown([mapDiv]);
   }
@@ -33,37 +33,48 @@ export class Town {
     const siblingTownNum = this.getSiblingTownNum();
     const parentTownSize = [parentTown.clientWidth, parentTown.clientHeight];
     for (let i = 0; i < siblingTownNum; i++) {
-      const [childTownSize, chlidTownMargin] =
-        this.getChildTownStyle(parentTownSize);
-      const townNode = this.getTownNode(childTownSize, chlidTownMargin);
+      const childTownStyle = this.getChildTownStyle(parentTownSize);
+      const townNode = this.getTownNode(childTownStyle);
       if (townNode) parentTown.appendChild(townNode);
     }
   }
 
-  getChildTownStyle(parentTownSize) {
-    const townSize = this.getTownSize(parentTownSize, "size");
-    const townMargin = this.getTownSize(parentTownSize, "margin");
-    return [townSize, townMargin];
+  getSiblingTownNum() {
+    return Math.floor(Math.random() * maxSiblingTownNum + 1);
   }
 
-  getTownNode(townSize, townMargin) {
+  getChildTownStyle(parentTownSize) {
+    const [parentTownWidth, parentTownHeight] = parentTownSize;
+    const childTownSize = [parentTownWidth * this.getRandomStyleRatio('size'), parentTownHeight * this.getRandomStyleRatio('size')]
+    const childTownMargin = [parentTownWidth * this.getRandomStyleRatio('margin'), parentTownHeight * this.getRandomStyleRatio('margin')]
+    return [childTownSize, childTownMargin];
+  }
+
+  getRandomStyleRatio(type) {
+    if (type === 'size') return Math.random() * (maxTownSizeRatio - minTownSizeRatio) + minTownSizeRatio;
+    if (type === 'margin') return Math.random() * (maxTownMarginRatio - minTownMarginRatio) + minTownMarginRatio;
+  }
+
+  getTownNode(townStyle) {
+    const [townSize, townMargin] = townStyle;
     const [townWidth, townHeight] = townSize;
     const [townTopDownMargin, townLeftRightMargin] = townMargin;
-    if (townWidth < smallestTownSize || townHeight < smallestTownSize) return;
+    if (this.isTownSizeValid(townWidth, townHeight)) return;
     this.townID++;
-
     const townNode = document.createElement("div");
     townNode.className = "town";
-    townNode.appendChild(this.getTownNameSpan());
-
+    townNode.appendChild(this.getTownIDSpan());
     townNode.style.width = `${townWidth}px`;
-    townNode.style.margin = `${townTopDownMargin}px ${townLeftRightMargin}px ${townLeftRightMargin}px ${townTopDownMargin}px`;
-
+    townNode.style.margin = `${townTopDownMargin}px ${townLeftRightMargin}px`;
     if (this.isTherePostBox()) this.createPostBox(townNode);
     return townNode;
   }
 
-  getTownNameSpan() {
+  isTownSizeValid(townWidth, townHeight){
+    return townWidth < smallestTownSize || townHeight < smallestTownSize;
+  }
+
+  getTownIDSpan() {
     const span = document.createElement("span");
     span.innerText = this.townID;
     return span;
@@ -74,26 +85,8 @@ export class Town {
     return random < postBoxExistingProbability;
   }
 
-  createPostBox(townDiv) {
+  createPostBox(townNode) {
     const postBox = new Postbox();
-    townDiv.insertAdjacentHTML("beforeend", postBox.getTemplate());
-  }
-
-  getTownSize(parentTownSize, type) {
-    const [parentTownWidth, parentTownHeight] = parentTownSize;
-    const childTownMaxRatio =
-      type === "size" ? maxTownSizeRatio : maxTownMarginRatio;
-    const childTownMinRatio =
-      type === "size" ? minTownSizeRatio : minTownMarginRatio;
-
-    const randomRatio =
-      Math.random() * (childTownMaxRatio - childTownMinRatio) +
-      childTownMinRatio;
-
-    return [parentTownWidth * randomRatio, parentTownHeight * randomRatio];
-  }
-
-  getSiblingTownNum() {
-    return Math.floor(Math.random() * maxSiblingTownNum + 1);
+    townNode.insertAdjacentHTML("beforeend", postBox.getTemplate());
   }
 }
