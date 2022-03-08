@@ -1,84 +1,90 @@
 import {
-  siblingTownMaxNum,
-  childTownSizeMinRatio,
-  childTownSizeMaxRatio,
-  townMinLength,
-  childTownMarginMaxRatio,
-  childTownMarginMinRatio,
-  postBoxCreatingPossibility
+  maxSiblingTownNum,
+  minTownSizeRatio,
+  maxTownSizeRatio,
+  smallestTownSize,
+  maxTownMarginRatio,
+  minTownMarginRatio,
+  postBoxExistingProbability,
 } from "./constant.js";
 import { Postbox } from "./Postbox.js";
 
 export class Town {
   constructor(mapSize) {
     this.mapSize = mapSize;
-    this.townID = 1;
+    this.townID = 0;
   }
 
   initTown() {
     const mapDiv = document.querySelector(".map");
-    this.buildTown([mapDiv])
+    this.buildTown([mapDiv]);
   }
 
-  buildTown(parentTownNodeList) {
-    for (let node of parentTownNodeList) {
-      this.appendChildTown(node);
-      if (!node.children) return;
-      const childrenTownArr = Array.from(node.children);
+  buildTown(parentTownArr) {
+    for (let parentTown of parentTownArr) {
+      this.giveChildTown(parentTown);
+      if (!parentTown.children) return;
+      const childrenTownArr = Array.from(parentTown.children);
       this.buildTown(childrenTownArr);
     }
   }
 
-  appendChildTown(parentTown) {
+  giveChildTown(parentTown) {
     const siblingTownNum = this.getSiblingTownNum();
     const parentTownSize = [parentTown.clientWidth, parentTown.clientHeight];
     for (let i = 0; i < siblingTownNum; i++) {
-      const townNode = this.getTownNode(parentTownSize);
+      const [childTownSize, chlidTownMargin] =
+        this.getChildTownStyle(parentTownSize);
+      const townNode = this.getTownNode(childTownSize, chlidTownMargin);
       if (townNode) parentTown.appendChild(townNode);
     }
   }
 
-  getTownNode(parentTownSize) {
-    const townDiv = document.createElement("div");
-    townDiv.className = "town";
-    townDiv.appendChild(this.getTownNameSpan())
-    const [townWidth, townHeight] = this.getTownSize(parentTownSize, "size");
-    const [townTopDownMargin, townLeftRightMargin] = this.getTownSize(
-      parentTownSize,
-      "margin"
-    );
-    if (townWidth < townMinLength || townHeight < townMinLength) return;
+  getChildTownStyle(parentTownSize) {
+    const townSize = this.getTownSize(parentTownSize, "size");
+    const townMargin = this.getTownSize(parentTownSize, "margin");
+    return [townSize, townMargin];
+  }
+
+  getTownNode(townSize, townMargin) {
+    const [townWidth, townHeight] = townSize;
+    const [townTopDownMargin, townLeftRightMargin] = townMargin;
+    if (townWidth < smallestTownSize || townHeight < smallestTownSize) return;
     this.townID++;
-    townDiv.style.width = `${townWidth}px`;
-    //townDiv.style["min-height"] = `${townHeight}px`;
-    townDiv.style.margin = `${townTopDownMargin}px ${townLeftRightMargin}px ${townLeftRightMargin}px ${townTopDownMargin}px`;
-    
-    if (this.isTherePostBox()) this.createPostBox(townDiv);
-    return townDiv;
+
+    const townNode = document.createElement("div");
+    townNode.className = "town";
+    townNode.appendChild(this.getTownNameSpan());
+
+    townNode.style.width = `${townWidth}px`;
+    townNode.style.margin = `${townTopDownMargin}px ${townLeftRightMargin}px ${townLeftRightMargin}px ${townTopDownMargin}px`;
+
+    if (this.isTherePostBox()) this.createPostBox(townNode);
+    return townNode;
   }
 
   getTownNameSpan() {
-    const span = document.createElement('span')
+    const span = document.createElement("span");
     span.innerText = this.townID;
-    return span
+    return span;
   }
 
   isTherePostBox() {
     const random = Math.random();
-    return random < postBoxCreatingPossibility;
+    return random < postBoxExistingProbability;
   }
 
   createPostBox(townDiv) {
     const postBox = new Postbox();
-    townDiv.insertAdjacentHTML('beforeend', postBox.getTemplate());
+    townDiv.insertAdjacentHTML("beforeend", postBox.getTemplate());
   }
 
   getTownSize(parentTownSize, type) {
     const [parentTownWidth, parentTownHeight] = parentTownSize;
     const childTownMaxRatio =
-      type === "size" ? childTownSizeMaxRatio : childTownMarginMaxRatio;
+      type === "size" ? maxTownSizeRatio : maxTownMarginRatio;
     const childTownMinRatio =
-      type === "size" ? childTownSizeMinRatio : childTownMarginMinRatio;
+      type === "size" ? minTownSizeRatio : minTownMarginRatio;
 
     const randomRatio =
       Math.random() * (childTownMaxRatio - childTownMinRatio) +
@@ -88,6 +94,6 @@ export class Town {
   }
 
   getSiblingTownNum() {
-    return Math.floor(Math.random() * siblingTownMaxNum + 1);
+    return Math.floor(Math.random() * maxSiblingTownNum + 1);
   }
 }
