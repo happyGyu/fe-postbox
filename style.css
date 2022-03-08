@@ -1,0 +1,30 @@
+body {
+    border: 2px solid;
+    margin: 1px auto;
+}
+
+.contents {
+    display:flex;
+    justify-content:space-around;
+    margin: 20px;
+}
+
+.map {
+    width: 90%;
+    min-height: 600px;
+    border: solid 2px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.title {
+    margin: 0 auto;
+    text-align: center;
+}
+
+button {
+    background-color: red;
+    color: white;
+    margin-left: 10px;
+}
+
