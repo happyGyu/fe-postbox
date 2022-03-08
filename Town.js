@@ -1,4 +1,4 @@
-import {townNum, childTownSizeMinRatio, childTownSizeMaxRatio, townMinLength} from "./constant.js"
+import {townNum, childTownWidthSizeMinRatio, childTownWidthSizeMaxRatio, childTownHeightSizeMinRatio, childTownHeightSizeMaxRatio, townMinLength} from "./constant.js"
 
 export class Town {
     constructor(mapSize){
@@ -23,7 +23,7 @@ export class Town {
 
     appendChildTown(parentTown){
         const townNum = this.getTownNum();
-        const parentTownSize=[parentTown.clientWidth,parentTown.clientHeight]
+        const parentTownSize=[parentTown.clientWidth, parentTown.clientHeight]
         for (let i = 0; i < townNum; i++) {
             const townNode=this.getTownNode(parentTownSize);
             if (townNode) parentTown.appendChild(townNode);
@@ -42,8 +42,9 @@ export class Town {
 
     getTownSize(parentTownSize){
         const [parentTownWidth, parentTownHeight] = parentTownSize;
-        const randomRatio = Math.random()*(childTownSizeMaxRatio - childTownSizeMinRatio) + childTownSizeMinRatio;
-        return [parentTownWidth * randomRatio, parentTownHeight * randomRatio]
+        const randomWidthRatio = Math.random()*(childTownWidthSizeMaxRatio - childTownWidthSizeMinRatio) + childTownWidthSizeMinRatio;
+        const randomHeightRatio = Math.random()*(childTownHeightSizeMaxRatio - childTownHeightSizeMinRatio) + childTownHeightSizeMinRatio;
+        return [parentTownWidth * randomWidthRatio, parentTownHeight * randomHeightRatio]
     }
 
     getTownNum() {

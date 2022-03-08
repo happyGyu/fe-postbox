@@ -1,7 +1,7 @@
-body {
+/* body {
     border: 2px solid;
     margin: 1px auto;
-}
+} */
 
 .contents {
     display:flex;
@@ -10,7 +10,7 @@ body {
 }
 
 .map {
-    width: 90%;
+    width: 80%;
     min-height: 600px;
     border: solid 2px;
     display: flex;
@@ -18,8 +18,8 @@ body {
 }
 
 .town{
-    border:solid 2px;
-    border-radius: 5px;
+    border:solid 5px;
+    border-radius: 7px;
     border-color: #2a98d8;
     margin:5px;
     display: flex;
@@ -27,13 +27,15 @@ body {
 }
 
 .title {
-    margin: 0 auto;
     text-align: center;
 }
 
 button {
     background-color: red;
     color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
     margin-left: 10px;
+    padding: 20px 50px;
 }
 

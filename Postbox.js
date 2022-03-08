@@ -1,6 +1,6 @@
 import {postBoxMaxSize} from "./constant.js"
 
-class Postbox {
+export class Postbox {
     constructor() {
         this.size = decideSize();
     } 
