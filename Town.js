@@ -8,6 +8,7 @@ import {
   postBoxExistingProbability,
 } from "./constant.js";
 import { Postbox } from "./Postbox.js";
+import { randomBetween } from "./util.js";
 
 export class Town {
   constructor() {
@@ -40,7 +41,7 @@ export class Town {
   }
 
   getSiblingTownNum() {
-    return Math.floor(Math.random() * maxSiblingTownNum + 1);
+    return Math.floor(randomBetween(1, maxSiblingTownNum));
   }
 
   getChildTownStyle(parentTownSize) {
@@ -51,8 +52,8 @@ export class Town {
   }
 
   getRandomStyleRatio(type) {
-    if (type === 'size') return Math.random() * (maxTownSizeRatio - minTownSizeRatio) + minTownSizeRatio;
-    if (type === 'margin') return Math.random() * (maxTownMarginRatio - minTownMarginRatio) + minTownMarginRatio;
+    if (type === 'size') return randomBetween(minTownSizeRatio, maxTownSizeRatio);
+    if (type === 'margin') return randomBetween(minTownMarginRatio, maxTownMarginRatio);
   }
 
   getTownNode(townStyle) {
@@ -81,8 +82,8 @@ export class Town {
   }
 
   isTherePostBox() {
-    const random = Math.random();
-    return random < postBoxExistingProbability;
+    const randomProbability = randomBetween(0, 1);
+    return randomProbability < postBoxExistingProbability;
   }
 
   createPostBox(townNode) {
