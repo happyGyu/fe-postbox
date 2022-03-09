@@ -34,3 +34,7 @@ button {
   margin-left: 10px;
   padding: 20px 50px;
 }
+
+.selected {
+  border-color: red;
+}
