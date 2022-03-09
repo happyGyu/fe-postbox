@@ -46,14 +46,22 @@ export class Town {
 
   getChildTownStyle(parentTownSize) {
     const [parentTownWidth, parentTownHeight] = parentTownSize;
-    const childTownSize = [parentTownWidth * this.getRandomStyleRatio('size'), parentTownHeight * this.getRandomStyleRatio('size')]
-    const childTownMargin = [parentTownWidth * this.getRandomStyleRatio('margin'), parentTownHeight * this.getRandomStyleRatio('margin')]
+    const childTownSize = [
+      parentTownWidth * this.getRandomStyleRatio("size"),
+      parentTownHeight * this.getRandomStyleRatio("size"),
+    ];
+    const childTownMargin = [
+      parentTownWidth * this.getRandomStyleRatio("margin"),
+      parentTownHeight * this.getRandomStyleRatio("margin"),
+    ];
     return [childTownSize, childTownMargin];
   }
 
   getRandomStyleRatio(type) {
-    if (type === 'size') return randomBetween(minTownSizeRatio, maxTownSizeRatio);
-    if (type === 'margin') return randomBetween(minTownMarginRatio, maxTownMarginRatio);
+    if (type === "size")
+      return randomBetween(minTownSizeRatio, maxTownSizeRatio);
+    if (type === "margin")
+      return randomBetween(minTownMarginRatio, maxTownMarginRatio);
   }
 
   getTownNode(townStyle) {
@@ -64,15 +72,20 @@ export class Town {
     this.townID++;
     const townNode = document.createElement("div");
     townNode.className = "town";
-    townNode.appendChild(this.getTownIDSpan());
+    this.setTownId(townNode);
     townNode.style.width = `${townWidth}px`;
     townNode.style.margin = `${townTopDownMargin}px ${townLeftRightMargin}px`;
     if (this.isTherePostBox()) this.createPostBox(townNode);
     return townNode;
   }
 
-  isTownSizeValid(townWidth, townHeight){
+  isTownSizeValid(townWidth, townHeight) {
     return townWidth < smallestTownSize || townHeight < smallestTownSize;
+  }
+
+  setTownId(townNode) {
+    townNode.dataset.id = this.townID;
+    townNode.appendChild(this.getTownIDSpan());
   }
 
   getTownIDSpan() {
