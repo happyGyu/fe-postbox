@@ -1,5 +1,5 @@
-import { maxPostBoxSize } from "./constant.js";
-import { randomBetween } from "./util.js";
+import {maxPostBoxSize} from './constant.js';
+import {randomBetween} from './util.js';
 
 export class Postbox {
   constructor() {
@@ -7,7 +7,7 @@ export class Postbox {
   }
 
   static decideSize() {
-    return randomBetween(1, maxPostBoxSize).toFixed(2)
+    return randomBetween(1, maxPostBoxSize).toFixed(2);
   }
 
   getTemplate() {
