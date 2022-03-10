@@ -1,6 +1,7 @@
 // mission2 러프하게 작업중인 파일입니다.
 import { delay } from "./util.js";
 import { highlightTownCssPath } from "./constant.js";
+import { getElementbyClass } from "./util.js";
 
 export class PostboxFinder {
   constructor() {
@@ -9,7 +10,7 @@ export class PostboxFinder {
 
   startFind() {
     delay(0).then(this.highlightTown);
-    const townNodeArr = Array.from(document.querySelector('.map').children)
+    const townNodeArr = Array.from(getElementbyClass(document, "map").children);
     this.updatePostboxData(townNodeArr);
   }
 
@@ -21,14 +22,16 @@ export class PostboxFinder {
   }
 
   updatePostboxData(townNodeArr) {
-    setTimeout(() => {this.searchPostbox(townNodeArr)},1000);
+    setTimeout(() => {
+      this.searchPostbox(townNodeArr);
+    }, 1000);
   }
 
   searchPostbox(townNodeArr) {
     for (let townNode of townNodeArr) {
       const postbox = this.hasPostBox(townNode);
       if (postbox) {
-        townNode.classList.add('selected');
+        townNode.classList.add("selected");
         const data = {};
         data.townId = townNode.dataset.id;
         data.postboxSize = postbox.dataset.size;
@@ -36,11 +39,11 @@ export class PostboxFinder {
       }
     }
     //this.rerenderResult();
-    townNodeArr.forEach(townNode => {
-      const childrenNodeArr = Array.from(townNode.children)
-      const townNodeArr = this.filterTownNode(childrenNodeArr)
+    townNodeArr.forEach((townNode) => {
+      const childrenNodeArr = Array.from(townNode.children);
+      const townNodeArr = this.filterTownNode(childrenNodeArr);
       if (townNodeArr) this.updatePostboxData(townNodeArr);
-    })
+    });
   }
 
   hasPostBox(townNode) {
@@ -51,9 +54,9 @@ export class PostboxFinder {
   }
 
   filterTownNode(nodeArr) {
-    return nodeArr.filter(node => {
-      if (node.className === 'town') return node;
-    })
+    return nodeArr.filter((node) => {
+      if (node.className === "town") return node;
+    });
   }
 
   rerenderResult() {}
