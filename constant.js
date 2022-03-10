@@ -1,6 +1,6 @@
 export const maxPostBoxSize = 5;
 export const maxSiblingTownNum = 5;
-export const smallestTownSize = 10;
+export const smallestTownSize = 15;
 export const maxTownSizeRatio = 0.6;
 export const minTownSizeRatio = 0.3;
 export const maxTownMarginRatio = (1 - maxTownSizeRatio) / 8;

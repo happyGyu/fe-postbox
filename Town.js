@@ -9,15 +9,14 @@ import {
 } from "./constant.js";
 import { Postbox } from "./Postbox.js";
 import { randomBetween } from "./util.js";
-
+import { $ } from "./util.js";
 export class Town {
   constructor() {
     this.townID = 0;
   }
 
   initTown() {
-    //querySelector 자체 API로 대체 예정
-    const mapDiv = document.querySelector(".map");
+    const mapDiv = $(document, ".map");
     this.buildTown([mapDiv]);
   }
 

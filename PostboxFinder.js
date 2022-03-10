@@ -1,7 +1,7 @@
 // mission2 러프하게 작업중인 파일입니다.
 import { delay } from "./util.js";
 import { highlightTownCssPath } from "./constant.js";
-import { getElementbyClass } from "./util.js";
+import { $ } from "./util.js";
 
 export class PostboxFinder {
   constructor() {
@@ -10,7 +10,7 @@ export class PostboxFinder {
 
   startFind() {
     delay(0).then(this.highlightTown);
-    const townNodeArr = Array.from(getElementbyClass(document, "map").children);
+    const townNodeArr = Array.from($(document, ".map").children);
     this.updatePostboxData(townNodeArr);
   }
 
@@ -18,7 +18,7 @@ export class PostboxFinder {
     const link = document.createElement("link");
     link.href = highlightTownCssPath;
     link.rel = "stylesheet";
-    document.querySelector("head").appendChild(link);
+    $(document, 'HEAD').appendChild(link);
   }
 
   updatePostboxData(townNodeArr) {
