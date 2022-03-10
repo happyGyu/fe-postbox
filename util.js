@@ -3,7 +3,7 @@ export function randomBetween(min, max) {
 }
 
 export function delay(time) {
-  return new Promise((resolve, reject) => {
+  return new Promise(resolve => {
     setTimeout(resolve, time);
   });
 }
@@ -17,7 +17,7 @@ function searchTargetElement(startElement, queryType, parsedQuery) {
   if (startElement.children.length === 0) return;
   const childrenArr = Array.from(startElement.children);
   for (let child of childrenArr) {
-    if (child[queryType] === parsedQuery) return child;
+    if (child[queryType].split(' ').includes(parsedQuery)) return child;
     const result = searchTargetElement(child, queryType, parsedQuery);
     if (result) return result;
   }
@@ -30,12 +30,7 @@ function checkQueryType(query) {
   return ['tagName', query.toUpperCase()];
 }
 
-export function insertionSort(
-  arr,
-  func = (a, b) => {
-    return a - b;
-  },
-) {
+export function insertionSort(arr, func = ascendingCallBack) {
   for (let i = 1; i < arr.length; i++) {
     const currVal = arr[i];
     let j = i - 1;
@@ -46,4 +41,8 @@ export function insertionSort(
     arr[j + 1] = currVal;
   }
   return arr;
+}
+
+function ascendingCallBack(a, b) {
+  return a - b;
 }

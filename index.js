@@ -6,10 +6,7 @@ function main() {
   const town = new Town();
   town.initTown();
   const postboxFinder = new PostboxFinder();
-  $(document, 'button').addEventListener(
-    'click',
-    postboxFinder.startFind.bind(postboxFinder),
-  );
+  $(document, 'button').addEventListener('click', postboxFinder.startFind.bind(postboxFinder));
 }
 
 main();
