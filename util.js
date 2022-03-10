@@ -4,9 +4,7 @@ export function randomBetween(min, max) {
 
 export function delay(time) {
   return new Promise((resolve, reject) => {
-    setTimeout(resolve(), time);
+    setTimeout(resolve, time);
   });
 }
 
-// export function getElementByClass(startNode, className) {
-// }

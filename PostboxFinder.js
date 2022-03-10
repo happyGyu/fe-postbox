@@ -8,7 +8,7 @@ export class PostboxFinder {
   }
 
   startFind() {
-    delay(2000).then(this.highlightTown);
+    delay(0).then(this.highlightTown);
     const townNodeArr = Array.from(document.querySelector('.map').children)
     this.updatePostboxData(townNodeArr);
   }
@@ -21,7 +21,7 @@ export class PostboxFinder {
   }
 
   updatePostboxData(townNodeArr) {
-    delay(0).then(() => {this.searchPostbox(townNodeArr)});
+    setTimeout(() => {this.searchPostbox(townNodeArr)},1000);
   }
 
   searchPostbox(townNodeArr) {
