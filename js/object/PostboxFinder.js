@@ -1,5 +1,4 @@
-import {delay, insertionSort} from '../util/util.js';
-import {$} from '../util/util.js';
+import {delay, insertionSort, $} from '../util/util.js';
 import {highlightTownCssPath} from '../constants.js';
 
 export class PostboxFinder {
@@ -40,16 +39,14 @@ export class PostboxFinder {
   }
 
   updatePostboxData(townNodeArr) {
-    setTimeout(() => {
-      this.searchPostbox(townNodeArr);
-    }, 0);
+    delay(0).then(() => this.searchPostbox(townNodeArr));
   }
 
   searchPostbox(townNodeArr) {
     for (let townNode of townNodeArr) {
-      const postbox = this.hasPostbox(townNode);
+      const postbox = this.getPostbox(townNode);
       if (postbox) {
-        townNode.classList.add('selected');
+        townNode.classList.add('owned');
         const data = {};
         data.townID = townNode.dataset.id;
         data.postboxSize = postbox.dataset.size;
@@ -63,7 +60,7 @@ export class PostboxFinder {
     });
   }
 
-  hasPostbox(townNode) {
+  getPostbox(townNode) {
     const childNodesArr = Array.from(townNode.children);
     for (let node of childNodesArr) {
       if (node.className === 'postbox') return node;

@@ -9,7 +9,7 @@ export function delay(time) {
 }
 
 export function $(startElement, query) {
-  const [queryType, parsedQuery] = checkQueryType(query);
+  const [queryType, parsedQuery] = parseQuery(query);
   return searchTargetElement(startElement, queryType, parsedQuery);
 }
 
@@ -23,7 +23,7 @@ function searchTargetElement(startElement, queryType, parsedQuery) {
   }
 }
 
-function checkQueryType(query) {
+function parseQuery(query) {
   const identifier = query[0];
   if (identifier === '.') return ['className', query.slice(1)];
   if (identifier === '#') return ['id', query.slice(1)];
