@@ -1,18 +1,10 @@
-import {
-  maxSiblingTownNum,
-  minTownSizeRatio,
-  maxTownSizeRatio,
-  smallestTownSize,
-  maxTownMarginRatio,
-  minTownMarginRatio,
-  postBoxExistingProbability,
-} from '../constant.js';
 import {Postbox} from './Postbox.js';
 import {randomBetween} from '../util/util.js';
 import {$} from '../util/util.js';
 
 export class Town {
-  constructor() {
+  constructor(randomInfo) {
+    this.randomInfo = randomInfo;
     this.townID = 0;
   }
 
@@ -41,7 +33,7 @@ export class Town {
   }
 
   getSiblingTownNum() {
-    return Math.floor(randomBetween(1, maxSiblingTownNum));
+    return Math.floor(randomBetween(1, this.randomInfo.maxSiblingTownNum));
   }
 
   getChildTownStyle(parentTownSize) {
@@ -58,8 +50,10 @@ export class Town {
   }
 
   getRandomStyleRatio(type) {
-    if (type === 'size') return randomBetween(minTownSizeRatio, maxTownSizeRatio);
-    if (type === 'margin') return randomBetween(minTownMarginRatio, maxTownMarginRatio);
+    if (type === 'size')
+      return randomBetween(this.randomInfo.minTownSizeRatio, this.randomInfo.maxTownSizeRatio);
+    if (type === 'margin')
+      return randomBetween(this.randomInfo.minTownMarginRatio, this.randomInfo.maxTownMarginRatio);
   }
 
   getTownNode(townStyle) {
@@ -73,12 +67,12 @@ export class Town {
     this.setTownId(townNode);
     townNode.style.width = `${townWidth}px`;
     townNode.style.margin = `${townTopDownMargin}px ${townLeftRightMargin}px`;
-    if (this.isTherePostBox()) this.createPostBox(townNode);
+    if (this.isTherePostbox()) this.createPostbox(townNode);
     return townNode;
   }
 
   isTownSizeValid(townWidth, townHeight) {
-    return townWidth < smallestTownSize || townHeight < smallestTownSize;
+    return townWidth < this.randomInfo.smallestTownSize || townHeight < this.randomInfo.smallestTownSize;
   }
 
   setTownId(townNode) {
@@ -92,13 +86,13 @@ export class Town {
     return span;
   }
 
-  isTherePostBox() {
+  isTherePostbox() {
     const randomProbability = randomBetween(0, 1);
-    return randomProbability < postBoxExistingProbability;
+    return randomProbability < this.randomInfo.postboxExistingProbability;
   }
 
-  createPostBox(townNode) {
-    const postBox = new Postbox();
-    townNode.insertAdjacentHTML('beforeend', postBox.getTemplate());
+  createPostbox(townNode) {
+    const postbox = new Postbox(this.randomInfo.maxPostboxSize);
+    townNode.insertAdjacentHTML('beforeend', postbox.getTemplate());
   }
 }

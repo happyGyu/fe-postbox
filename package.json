@@ -16,5 +16,8 @@
     "url": "https://github.com/happyGyu/fe-postbox/issues"
   },
   "homepage": "https://github.com/happyGyu/fe-postbox#readme",
-  "type": "module"
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
 }

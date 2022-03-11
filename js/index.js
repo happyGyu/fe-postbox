@@ -4,13 +4,13 @@ import {$} from './util/util.js';
 import {severURL} from './constants.js';
 
 function main() {
-  fetch(`${severURL}/info/randomRange`)
+  fetch(`${severURL}/info/random`)
     .then(response => response.json())
     .then(init);
 }
 
-function init(randomRangeInfo) {
-  const town = new Town(randomRangeInfo);
+function init(randomInfo) {
+  const town = new Town(randomInfo);
   town.initTown();
   const postboxFinder = new PostboxFinder();
   $(document, 'button').addEventListener('click', postboxFinder.startFind.bind(postboxFinder));

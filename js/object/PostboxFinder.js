@@ -34,7 +34,7 @@ export class PostboxFinder {
   }
 
   printSortedTownID() {
-    const resultDiv = $(document, '.postBoxSize');
+    const resultDiv = $(document, '.postboxSize');
     const sortedData = insertionSort(this.postboxData, (a, b) => a.postboxSize - b.postboxSize);
     resultDiv.innerText = `우체통의 크기는 ${sortedData.map(data => data.townID).join(',')}순 입니다.`;
   }
@@ -47,7 +47,7 @@ export class PostboxFinder {
 
   searchPostbox(townNodeArr) {
     for (let townNode of townNodeArr) {
-      const postbox = this.hasPostBox(townNode);
+      const postbox = this.hasPostbox(townNode);
       if (postbox) {
         townNode.classList.add('selected');
         const data = {};
@@ -63,7 +63,7 @@ export class PostboxFinder {
     });
   }
 
-  hasPostBox(townNode) {
+  hasPostbox(townNode) {
     const childNodesArr = Array.from(townNode.children);
     for (let node of childNodesArr) {
       if (node.className === 'postbox') return node;

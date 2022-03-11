@@ -1,9 +1,9 @@
-{"maxPostBoxSize" : 5,
+{"maxPostboxSize" : 5,
 "maxSiblingTownNum" : 5,
 "smallestTownSize" : 15,
 "maxTownSizeRatio" : 0.6,
 "minTownSizeRatio" : 0.3,
 "maxTownMarginRatio" : 0.05,
 "minTownMarginRatio" : 0,
-"postBoxExistingProbability" : 0.2
+"postboxExistingProbability" : 0.2
 }
