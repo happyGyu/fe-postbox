@@ -3,10 +3,10 @@ import {randomBetween} from '../util/util.js';
 export class Postbox {
   constructor(maxPostboxSize) {
     this.maxPostboxSize = maxPostboxSize;
-    this.size = this.decideSize();
+    this.size = Postbox.decideSize.bind(this)();
   }
 
-  decideSize() {
+  static decideSize() {
     return randomBetween(1, this.maxPostboxSize).toFixed(2);
   }
 
