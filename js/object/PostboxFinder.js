@@ -34,7 +34,7 @@ export class PostboxFinder {
 
   printSortedTownID() {
     const resultDiv = $(document, '.postboxSize');
-    const sortedData = insertionSort(this.postboxData, (a, b) => a.postboxSize - b.postboxSize);
+    const sortedData = insertionSort(this.postboxData, (a, b) => b.postboxSize - a.postboxSize);
     resultDiv.innerText = `우체통의 크기는 ${sortedData.map(data => data.townID).join(',')}순 입니다.`;
   }
 
