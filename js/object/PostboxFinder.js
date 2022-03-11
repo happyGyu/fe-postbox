@@ -1,7 +1,6 @@
-// mission2 러프하게 작업중인 파일입니다.
-import {delay, insertionSort} from './util.js';
-import {highlightTownCssPath} from './constant.js';
-import {$} from './util.js';
+import {delay, insertionSort} from '../util/util.js';
+import {$} from '../util/util.js';
+import {highlightTownCssPath} from '../constants.js';
 
 export class PostboxFinder {
   constructor() {

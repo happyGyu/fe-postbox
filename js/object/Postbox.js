@@ -1,5 +1,5 @@
-import {maxPostBoxSize} from './constant.js';
-import {randomBetween} from './util.js';
+import {maxPostBoxSize} from '../constant.js';
+import {randomBetween} from '../util/util.js';
 
 export class Postbox {
   constructor() {

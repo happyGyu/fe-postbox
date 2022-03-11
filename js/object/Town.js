@@ -6,17 +6,18 @@ import {
   maxTownMarginRatio,
   minTownMarginRatio,
   postBoxExistingProbability,
-} from "./constant.js";
-import { Postbox } from "./Postbox.js";
-import { randomBetween } from "./util.js";
-import { $ } from "./util.js";
+} from '../constant.js';
+import {Postbox} from './Postbox.js';
+import {randomBetween} from '../util/util.js';
+import {$} from '../util/util.js';
+
 export class Town {
   constructor() {
     this.townID = 0;
   }
 
   initTown() {
-    const mapDiv = $(document, ".map");
+    const mapDiv = $(document, '.map');
     this.buildTown([mapDiv]);
   }
 
@@ -46,21 +47,19 @@ export class Town {
   getChildTownStyle(parentTownSize) {
     const [parentTownWidth, parentTownHeight] = parentTownSize;
     const childTownSize = [
-      parentTownWidth * this.getRandomStyleRatio("size"),
-      parentTownHeight * this.getRandomStyleRatio("size"),
+      parentTownWidth * this.getRandomStyleRatio('size'),
+      parentTownHeight * this.getRandomStyleRatio('size'),
     ];
     const childTownMargin = [
-      parentTownWidth * this.getRandomStyleRatio("margin"),
-      parentTownHeight * this.getRandomStyleRatio("margin"),
+      parentTownWidth * this.getRandomStyleRatio('margin'),
+      parentTownHeight * this.getRandomStyleRatio('margin'),
     ];
     return [childTownSize, childTownMargin];
   }
 
   getRandomStyleRatio(type) {
-    if (type === "size")
-      return randomBetween(minTownSizeRatio, maxTownSizeRatio);
-    if (type === "margin")
-      return randomBetween(minTownMarginRatio, maxTownMarginRatio);
+    if (type === 'size') return randomBetween(minTownSizeRatio, maxTownSizeRatio);
+    if (type === 'margin') return randomBetween(minTownMarginRatio, maxTownMarginRatio);
   }
 
   getTownNode(townStyle) {
@@ -69,8 +68,8 @@ export class Town {
     const [townTopDownMargin, townLeftRightMargin] = townMargin;
     if (this.isTownSizeValid(townWidth, townHeight)) return;
     this.townID++;
-    const townNode = document.createElement("div");
-    townNode.className = "town";
+    const townNode = document.createElement('div');
+    townNode.className = 'town';
     this.setTownId(townNode);
     townNode.style.width = `${townWidth}px`;
     townNode.style.margin = `${townTopDownMargin}px ${townLeftRightMargin}px`;
@@ -88,7 +87,7 @@ export class Town {
   }
 
   getTownIDSpan() {
-    const span = document.createElement("span");
+    const span = document.createElement('span');
     span.innerText = this.townID;
     return span;
   }
@@ -100,6 +99,6 @@ export class Town {
 
   createPostBox(townNode) {
     const postBox = new Postbox();
-    townNode.insertAdjacentHTML("beforeend", postBox.getTemplate());
+    townNode.insertAdjacentHTML('beforeend', postBox.getTemplate());
   }
 }
