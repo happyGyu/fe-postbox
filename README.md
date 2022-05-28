@@ -4,27 +4,6 @@
 ***
 ## 🗓 __기간__
 22.03.07 ~ 22.03.11 (1주일)
-***
-## 🙋‍♀️ __Members__ 🙋‍♂️
-
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://github.com/mogooee">
-        <img src="https://avatars.githubusercontent.com/u/92701121?v=4" width="150px;" alt="Dotori"/><br />
-        <sub><b>Dotori</b><br></sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/happyGyu">
-        <img src="https://avatars.githubusercontent.com/u/95538993?s=400&u=142c62a8238fbfd3a3e46976651dbc991cafc088&v=4" width="150px;" alt="Alan"/><br />
-        <sub><b>Alan</b><br></sub>
-      </a>
-    </td>
-  </tr>
-</table>
-
-***
 
 ## 🛠 __프로젝트 요약__
 - Vanilla JS
@@ -133,4 +112,25 @@
 <div>
 </details>
 
+***
+## 🙋‍♀️ __Members__ 🙋‍♂️
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/mogooee">
+        <img src="https://avatars.githubusercontent.com/u/92701121?v=4" width="150px;" alt="Dotori"/><br />
+        <sub><b>Dotori</b><br></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/happyGyu">
+        <img src="https://avatars.githubusercontent.com/u/95538993?s=400&u=142c62a8238fbfd3a3e46976651dbc991cafc088&v=4" width="150px;" alt="Alan"/><br />
+        <sub><b>Alan</b><br></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+***
 
